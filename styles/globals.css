@@ -1,0 +1,8 @@
+@tailwind base;
+@layer base {
+    ::-webkit-scrollbar {
+        width: 0;
+    }
+}
+@tailwind components;
+@tailwind utilities;
