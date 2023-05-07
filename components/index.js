@@ -1,8 +1,8 @@
+export * as Image from "next/image"
+export * as Link from "next/link"
 export { Toaster, toast } from "react-hot-toast"
 export { TiDeleteOutline } from "react-icons/ti"
 export { BsBagCheckFill } from "react-icons/bs"
-export * as Image from "next/image"
-export * as Link from "next/link"
 export {
     AiOutlineLeft,
     AiOutlineShopping,

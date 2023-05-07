@@ -58,7 +58,7 @@ export const Sidebar = () => {
         stripe.redirectToCheckout({ sessionId: data.id })
     }
     return (
-        <sidebar
+        <aside
             className={`fixed bottom-0 left-0 right-0 top-0 z-50 flex bg-black/50 ${
                 activeCheckout ? "" : "hidden"
             }`}
@@ -105,7 +105,7 @@ export const Sidebar = () => {
                                     className="w-full rounded-2xl bg-red-1 py-2 text-lg font-bold uppercase text-white"
                                     onClick={handleCheckout}
                                 >
-                                    pay with stripe
+                                    Pay with Stripe
                                 </button>
                             </>
                         ) : (
@@ -120,6 +120,6 @@ export const Sidebar = () => {
                     </div>
                 </div>
             </div>
-        </sidebar>
+        </aside>
     )
 }
