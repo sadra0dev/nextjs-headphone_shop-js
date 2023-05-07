@@ -11,6 +11,7 @@ import {
 
 export const Sidebar = () => {
     const [count, setCount] = useState(0)
+    const [checkout, setCheckout] = useState(false)
     const [activeCart, setActiveCart] = useState(false)
     const {
         actionCheckout,
@@ -38,6 +39,9 @@ export const Sidebar = () => {
         setCount(cartCount)
         getAllPrice()
     }, [cartCount])
+    useEffect(() => {
+        setCheckout(activeCheckout)
+    }, [activeCheckout])
     const handleCheckout = async () => {
         const stripe = await getStripe()
 
@@ -60,7 +64,7 @@ export const Sidebar = () => {
     return (
         <aside
             className={`fixed bottom-0 left-0 right-0 top-0 z-50 flex bg-black/50 ${
-                activeCheckout ? "" : "hidden"
+                checkout ? "" : "hidden"
             }`}
         >
             <div className="ms-auto flex h-full w-[600px] flex-col bg-white">
