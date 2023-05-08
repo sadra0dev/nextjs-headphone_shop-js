@@ -5,14 +5,9 @@ import {
     AiFillStar,
     Layout,
     Image,
+    toast,
 } from "@project/components"
-import {
-    useRouter,
-    useEffect,
-    useState,
-    useCallback,
-    groq,
-} from "@project/libs"
+import { useRouter, useEffect, useState, useCallback } from "@project/libs"
 import { useShopStore } from "@project/stores"
 import {
     client,
@@ -27,6 +22,7 @@ export default function ProductPage({ suggestSeller, product }) {
     } = useRouter()
     const {
         carts,
+        cartCount,
         newCarts,
         updateCart,
         getCartCount,
@@ -35,6 +31,7 @@ export default function ProductPage({ suggestSeller, product }) {
         currency,
     } = useShopStore((state) => ({
         carts: state.carts,
+        cartCount: state.cartCount,
         currency: state.currency,
         newCarts: state.newCarts,
         updateCart: state.updateCart,

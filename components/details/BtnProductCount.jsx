@@ -1,4 +1,4 @@
-import { AiOutlineMinus, AiOutlinePlus } from "@project/components"
+import { AiOutlineMinus, AiOutlinePlus, toast } from "@project/components"
 import { memo, useState, useEffect } from "@project/libs"
 import { useShopStore } from "@project/stores"
 
@@ -16,12 +16,14 @@ export const BtnProductCount = memo(({ slug }) => {
             carts[index]["count"] = carts[index].count - 1
             setCount(carts[index].count)
             getCartCount()
+            toast.error(`Products in your shopping cart ${count - 1}`)
         }
     }
     const plusHandle = () => {
         carts[index]["count"] = carts[index].count + 1
         setCount(carts[index].count)
         getCartCount()
+        toast.success(`Products in your shopping cart ${count + 1}`)
     }
 
     useEffect(() => {
