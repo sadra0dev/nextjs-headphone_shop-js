@@ -5,5 +5,5 @@ export {
 } from "zustand/middleware"
 export { useRouter } from "next/router"
 export { create as zustandCreate } from "zustand"
-export { useState, useEffect, useCallback, memo } from "react"
+export { useState, useEffect, useCallback, useMemo, memo } from "react"
 export { createClient as sanityClient, groq } from "next-sanity"

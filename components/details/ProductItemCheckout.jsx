@@ -3,10 +3,22 @@ import { useShopStore } from "@project/stores"
 import { memo } from "@project/libs"
 
 export const ProductItemCheckout = memo(({ product, index }) => {
-    const { deleteCart, getCartCount } = useShopStore((state) => ({
-        deleteCart: state.deleteCart,
-        getCartCount: state.getCartCount,
-    }))
+    const { carts, deleteCart, getCartCount, actionCheckout } = useShopStore(
+        (state) => ({
+            carts: state.carts,
+            deleteCart: state.deleteCart,
+            getCartCount: state.getCartCount,
+            actionCheckout: state.actionCheckout,
+        })
+    )
+    const removeItemHandle = () => {
+        deleteCart(index)
+        getCartCount()
+        if (carts.length < 1) {
+            actionCheckout()
+        }
+    }
+
     return (
         <div className="rounded-2xl p-3 shadow-lg">
             <div className="flex items-stretch gap-4 md:gap-7">
@@ -26,10 +38,7 @@ export const ProductItemCheckout = memo(({ product, index }) => {
                         <BtnProductCount slug={product?.slug} />
                         <button
                             className="text-2xl text-red-1 hover:scale-105"
-                            onClick={() => {
-                                deleteCart(index)
-                                getCartCount()
-                            }}
+                            onClick={removeItemHandle}
                         >
                             <TiDeleteOutline />
                         </button>

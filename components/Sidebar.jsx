@@ -29,11 +29,7 @@ export const Sidebar = () => {
         getAllPrice: state.getAllPrice,
     }))
     useEffect(() => {
-        if (carts.length > 0) {
-            setActiveCart(true)
-        } else {
-            setActiveCart(false)
-        }
+        setActiveCart(() => (carts.length > 0 ? true : false))
     }, [carts])
     useEffect(() => {
         setCount(cartCount)

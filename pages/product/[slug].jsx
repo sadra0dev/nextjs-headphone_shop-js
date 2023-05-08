@@ -1,5 +1,3 @@
-import { useRouter, useEffect, useState, useCallback } from "@project/libs"
-import { useShopStore } from "@project/stores"
 import {
     BtnProductCount,
     CategorySeller,
@@ -8,10 +6,14 @@ import {
     Layout,
     Image,
 } from "@project/components"
+import { useRouter, useEffect, useState, useCallback } from "@project/libs"
+import { useShopStore } from "@project/stores"
 import { api } from "@project/configs"
 
 export default function ProductPage({ suggestSeller, product }) {
-    const { query } = useRouter()
+    const {
+        query: { slug },
+    } = useRouter()
     const {
         carts,
         newCarts,
@@ -22,32 +24,24 @@ export default function ProductPage({ suggestSeller, product }) {
         currency,
     } = useShopStore((state) => ({
         carts: state.carts,
+        currency: state.currency,
         newCarts: state.newCarts,
         updateCart: state.updateCart,
+        getAllPrice: state.getAllPrice,
         getCartCount: state.getCartCount,
         actionCheckout: state.actionCheckout,
-        getAllPrice: state.getAllPrice,
-        currency: state.currency,
     }))
     const [qtyActive, setQtyActive] = useState(false)
     const [largeImage, setLargeImage] = useState(product.images[0])
-    const index = carts.findIndex((cart) => cart["slug"] === query.slug)
+    const index = carts.findIndex((cart) => cart["slug"] === slug)
     const handleAddToCart = useCallback(() => {
-        if (index === -1) {
-            newCarts({ ...product })
-        } else {
-            updateCart(product, index)
-        }
+        index === -1 ? newCarts({ ...product }) : updateCart(product, index)
         getCartCount()
-    }, [query.slug, carts])
+    }, [slug, carts])
 
     useEffect(() => {
-        if (index === -1) {
-            setQtyActive(false)
-        } else {
-            setQtyActive(true)
-        }
-    }, [query.slug, index])
+        setQtyActive(() => (index === -1 ? false : true))
+    }, [slug, index])
 
     return (
         <Layout>
@@ -114,7 +108,7 @@ export default function ProductPage({ suggestSeller, product }) {
                                     : "pointer-events-none opacity-50"
                             }`}
                         >
-                            <BtnProductCount slug={query.slug} />
+                            <BtnProductCount slug={slug} />
                         </div>
                     </div>
                     <div className="mt-10 flex gap-8">
