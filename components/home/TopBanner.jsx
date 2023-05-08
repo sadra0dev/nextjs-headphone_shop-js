@@ -35,7 +35,9 @@ export function TopBanner({
                 />
                 <div className="-ms-20 hidden flex-col gap-1.5 self-end text-end text-dark-2 lg:flex">
                     <p className="font-bold">{descriptionTitle}</p>
-                    <p className="font-extralight">{descriptionContent}</p>
+                    <p className="max-w-xs font-extralight">
+                        {descriptionContent}
+                    </p>
                 </div>
             </div>
         </section>
