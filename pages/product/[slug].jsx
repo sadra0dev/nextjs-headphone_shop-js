@@ -6,9 +6,20 @@ import {
     Layout,
     Image,
 } from "@project/components"
-import { useRouter, useEffect, useState, useCallback } from "@project/libs"
+import {
+    useRouter,
+    useEffect,
+    useState,
+    useCallback,
+    groq,
+} from "@project/libs"
 import { useShopStore } from "@project/stores"
-import { api } from "@project/configs"
+import {
+    client,
+    apiProductSlugs,
+    apiProduct,
+    apiSuggestSeller,
+} from "@project/configs"
 
 export default function ProductPage({ suggestSeller, product }) {
     const {
@@ -137,8 +148,7 @@ export default function ProductPage({ suggestSeller, product }) {
 }
 
 export const getStaticPaths = async () => {
-    const slugs = (await api.get("/products/[slug]")).data
-
+    const slugs = await client.fetch(apiProductSlugs())
     const paths = slugs.map((item) => ({ params: { slug: item.slug } }))
     return {
         paths,
@@ -146,8 +156,9 @@ export const getStaticPaths = async () => {
     }
 }
 export const getStaticProps = async ({ params: { slug } }) => {
-    const product = (await api.get(`/products/${slug}`)).data
-    const suggestSeller = (await api.get("/products/suggest")).data
+    const product = await client.fetch(apiProduct(slug))
+    const suggestSeller = await client.fetch(apiSuggestSeller())
+
     return {
         props: { suggestSeller, product },
     }

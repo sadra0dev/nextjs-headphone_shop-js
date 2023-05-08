@@ -1,7 +1,5 @@
-import useSWR from "swr"
-import axios from "axios"
+import { useSWR, axios } from "@project/libs"
 
-// config axios
 export const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL + "/api",
 })
@@ -20,3 +18,5 @@ export function useApi(request, { fallbackData, ...config } = {}) {
         }
     )
 }
+
+// This file is not used in this project

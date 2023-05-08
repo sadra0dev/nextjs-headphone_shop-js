@@ -2,7 +2,7 @@ import { Stripe } from "@project/libs"
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY)
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
     if (req.method === "POST") {
         console.log("body=======", req.body)
         try {
@@ -58,3 +58,5 @@ export default async function handler(req, res) {
         res.status(405).end("Method Not Allowed")
     }
 }
+
+export default handler

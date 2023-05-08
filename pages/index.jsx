@@ -4,7 +4,7 @@ import {
     BottomBanner,
     CategorySeller,
 } from "@project/components"
-import { api } from "@project/configs"
+import { client, apiBestSeller, apiTopBanner } from "@project/configs"
 
 export default function HomePage({ bestSeller, headerBanner }) {
     return (
@@ -21,8 +21,8 @@ export default function HomePage({ bestSeller, headerBanner }) {
 }
 
 export const getStaticProps = async () => {
-    const bestSeller = (await api.get("/products/best-seller")).data
-    const headerBanner = (await api.get("/banner/header")).data
+    const bestSeller = await client.fetch(apiBestSeller())
+    const headerBanner = await client.fetch(apiTopBanner())
     return {
         props: { bestSeller, headerBanner },
     }
