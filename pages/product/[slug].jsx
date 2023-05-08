@@ -104,7 +104,7 @@ export default function ProductPage({ suggestSeller, product }) {
                     </div>
                     <div className="mt-4">
                         <h4 className="font-bold">Details</h4>
-                        <p>{product.details}</p>
+                        <p className="max-w-lg">{product.details}</p>
                     </div>
                     <div className="mt-7 text-2xl font-bold text-red-1">
                         {currency}
