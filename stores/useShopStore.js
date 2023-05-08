@@ -46,7 +46,10 @@ export const useShopStore = zustandCreate()(
                     set(() => ({ carts: [...carts] }))
                 },
             }),
-            { name: "shop-storage" }
+            {
+                enabled: false,
+                name: "shop-storage",
+            }
         )
     )
 )
